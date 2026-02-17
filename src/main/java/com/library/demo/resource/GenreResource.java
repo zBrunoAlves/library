@@ -9,26 +9,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.library.demo.entities.User;
-import com.library.demo.services.UserService;
+import com.library.demo.entities.Genre;
+import com.library.demo.services.GenreService;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource {
+@RequestMapping(value = "/genres")
+public class GenreResource {
 
 	@Autowired
-	private UserService service;
+	private GenreService service;
 
 	@GetMapping
-	private ResponseEntity<List<User>> findAll() {
-		List<User> list = service.findAll();
+	public ResponseEntity<List<Genre>> findAll() {
+		List<Genre> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	private ResponseEntity<User> findById(@PathVariable Long id) {
-		User obj = service.findById(id);
+	public ResponseEntity<Genre> findById(@PathVariable Long id) {
+		Genre obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
-		
 	}
+
 }

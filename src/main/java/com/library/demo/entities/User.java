@@ -1,9 +1,19 @@
 package com.library.demo.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_user")
@@ -29,6 +39,13 @@ public class User implements Serializable {
 
     @Column(nullable = false, unique = true)
     private String cpf;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Sale> sale = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Loan> loan = new ArrayList<>();
 
     public User() {
     }
@@ -98,5 +115,13 @@ public class User implements Serializable {
         User other = (User) obj;
         return Objects.equals(id, other.id);
     }
+
+	public List<Sale> getSale() {
+		return sale;
+	}
+
+	public List<Loan> getLoan() {
+		return loan;
+	}
 
 }

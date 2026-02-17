@@ -8,27 +8,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.service.annotation.PatchExchange;
 
-import com.library.demo.entities.User;
-import com.library.demo.services.UserService;
+import com.library.demo.entities.Author;
+import com.library.demo.services.AuthorService;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource {
+@RequestMapping(value = "/authors")
+public class AuthorResource {
 
 	@Autowired
-	private UserService service;
+	private AuthorService service;
 
 	@GetMapping
-	private ResponseEntity<List<User>> findAll() {
-		List<User> list = service.findAll();
+	public ResponseEntity<List<Author>> findAll() {
+		List<Author> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	private ResponseEntity<User> findById(@PathVariable Long id) {
-		User obj = service.findById(id);
+	public ResponseEntity<Author> findById(@PathVariable Long id) {
+		Author obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
-		
 	}
 }

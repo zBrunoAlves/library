@@ -9,26 +9,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.library.demo.entities.User;
-import com.library.demo.services.UserService;
+import com.library.demo.entities.Loan;
+import com.library.demo.services.LoanService;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource {
+@RequestMapping(value = "/loans")
+public class LoanResource {
 
 	@Autowired
-	private UserService service;
+	private LoanService service;
 
 	@GetMapping
-	private ResponseEntity<List<User>> findAll() {
-		List<User> list = service.findAll();
+	public ResponseEntity<List<Loan>> findAll() {
+		List<Loan> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	private ResponseEntity<User> findById(@PathVariable Long id) {
-		User obj = service.findById(id);
+	public ResponseEntity<Loan> findById(@PathVariable Long id) {
+		Loan obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
-		
 	}
+
 }
